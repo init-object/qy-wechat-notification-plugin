@@ -20,7 +20,7 @@
         <version>4.31</version>
     </parent>
     <artifactId>qy-wechat-notification</artifactId>
-    <version>1.1.4-RELEASE</version>
+    <version>1.1.4</version>
     <packaging>hpi</packaging>
 
     <name>Qy Wechat Notification Plugin</name>
@@ -28,9 +28,9 @@
     <url>https://wiki.jenkins.io/display/JENKINS/Qy+Wechat+Notification+Plugin</url>
     <developers>
         <developer>
-            <id>lucaslai</id>
-            <name>Lucas Lai</name>
-            <email>lan_ff@qq.com</email>
+            <id>wangkun</id>
+            <name>wangkun</name>
+            <email>mail@wangkun.vip</email>
         </developer>
     </developers>
 
@@ -45,9 +45,9 @@
     </properties>
 
     <scm>
-        <connection>scm:git:git://github.com/jenkinsci/qy-wechat-notification-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:jenkinsci/qy-wechat-notification-plugin.git</developerConnection>
-        <url>http://github.com/jenkinsci/qy-wechat-notification-plugin</url>
+        <connection>scm:git:git://github.com/init-object/qy-wechat-notification-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:init-object/qy-wechat-notification-plugin.git</developerConnection>
+        <url>http://github.com/init-object/qy-wechat-notification-plugin</url>
         <tag>HEAD</tag>
     </scm>
 

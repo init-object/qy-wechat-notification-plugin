@@ -38,6 +38,7 @@ public class BuildBeginInfo {
      * 本次构建Blue Ocean控制台地址
      */
     private String buleOceanConsoleUrl;
+    
 
     /**
      * 工程名称
@@ -128,20 +129,21 @@ public class BuildBeginInfo {
 
         //组装内容
         Map<String, Object> result = new HashMap<String, Object>();
-        StringBuilder content = new StringBuilder();
+        StringBuilder title = new StringBuilder();
         if(StringUtils.isNotEmpty(topicName)){
-            content.append(this.topicName);
+            title.append(this.topicName);
         }
-        content.append("【" + this.projectName + "】开始构建\n");
-        result.put("title", content.toString());
-        content.append(" 构建参数：" + paramBuffer.toString() + "\n");
-        content.append(" 预计用时：" +  durationTimeStr + "\n");
+        title.append("【" + this.projectName + "】开始构建\n");
+        result.put("title", title.toString());
+         StringBuilder content = new StringBuilder();
+        content.append("构建参数：" + paramBuffer.toString() + "\n");
+        content.append("预计用时：" +  durationTimeStr + "\n");
         if (StringUtils.isNotEmpty(moreInfo)){
-            content.append(""+moreInfo+"\n");
+            content.append("\n"+moreInfo+"\n\n");
         }
         if(StringUtils.isNotEmpty(this.consoleUrl)){
-            content.append("[查看控制台](" + this.consoleUrl + ")\n");
-            content.append("[查看BlueOcean控制台](" + this.buleOceanConsoleUrl + ")\n");
+            content.append("[查看控制台]:\n " + this.consoleUrl + "\n");
+            content.append("[查看BlueOcean控制台]:\n" + this.buleOceanConsoleUrl + "\n");
         }
 
         result.put("content", content.toString());
