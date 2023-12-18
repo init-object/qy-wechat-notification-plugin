@@ -33,6 +33,12 @@ public class BuildBeginInfo {
      */
     private String consoleUrl;
 
+
+    /**
+     * 本次构建Blue Ocean控制台地址
+     */
+    private String buleOceanConsoleUrl;
+
     /**
      * 工程名称
      */
@@ -64,20 +70,29 @@ public class BuildBeginInfo {
         }
         //控制台地址
         StringBuilder urlBuilder = new StringBuilder();
+        StringBuilder blueOceanUrlBuilder = new StringBuilder();
+        
         String jenkinsUrl = NotificationUtil.getJenkinsUrl();
         if(StringUtils.isNotEmpty(jenkinsUrl)){
             String buildUrl = build.getUrl();
             urlBuilder.append(jenkinsUrl);
+            blueOceanUrlBuilder.append(jenkinsUrl);
             if(!jenkinsUrl.endsWith("/")){
                 urlBuilder.append("/");
+                blueOceanUrlBuilder.append("/");
             }
+            blueOceanUrlBuilder.append("blue/organizations/jenkins/");
+            blueOceanUrlBuilder.append(projectName + "/detail/" + projectName + "/"+ build.getNumber()+"/");
             urlBuilder.append(buildUrl);
             if(!buildUrl.endsWith("/")){
                 urlBuilder.append("/");
+                blueOceanUrlBuilder.append("/");
             }
             urlBuilder.append("console");
+            blueOceanUrlBuilder.append("pipeline/");
         }
         this.consoleUrl = urlBuilder.toString();
+        this.buleOceanConsoleUrl = blueOceanUrlBuilder.toString();
         //工程名称
         this.projectName = projectName;
         //环境名称
@@ -112,28 +127,26 @@ public class BuildBeginInfo {
         }
 
         //组装内容
+        Map<String, Object> result = new HashMap<String, Object>();
         StringBuilder content = new StringBuilder();
         if(StringUtils.isNotEmpty(topicName)){
             content.append(this.topicName);
         }
-        content.append("<font color=\"info\">【" + this.projectName + "】</font>开始构建\n");
-        content.append(" >构建参数：<font color=\"comment\">" + paramBuffer.toString() + "</font>\n");
-        content.append(" >预计用时：<font color=\"comment\">" +  durationTimeStr + "</font>\n");
+        content.append("【" + this.projectName + "】开始构建\n");
+        result.put("title", content.toString());
+        content.append(" 构建参数：" + paramBuffer.toString() + "\n");
+        content.append(" 预计用时：" +  durationTimeStr + "\n");
         if (StringUtils.isNotEmpty(moreInfo)){
-            content.append(" >"+moreInfo+"\n");
+            content.append(""+moreInfo+"\n");
         }
         if(StringUtils.isNotEmpty(this.consoleUrl)){
-            content.append(" >[查看控制台](" + this.consoleUrl + ")");
+            content.append("[查看控制台](" + this.consoleUrl + ")\n");
+            content.append("[查看BlueOcean控制台](" + this.buleOceanConsoleUrl + ")\n");
         }
 
-        Map markdown = new HashMap<String, Object>();
-        markdown.put("content", content.toString());
+        result.put("content", content.toString());
 
-        Map data = new HashMap<String, Object>();
-        data.put("msgtype", "markdown");
-        data.put("markdown", markdown);
-
-        String req = JSONObject.fromObject(data).toString();
+        String req = JSONObject.fromObject(result).toString();
         return req;
     }
 
