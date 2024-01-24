@@ -61,4 +61,9 @@ public class NotificationConfig {
      * 仅失败的时候发送企业微信通知
      */
     public boolean onlyFailSendQyWechatNotify = false;
+
+     /**
+     * 使用ocean控制台
+     */
+    public boolean useBuleOceanConsole = false;
 }

@@ -38,6 +38,8 @@ public class BuildBeginInfo {
      * 本次构建Blue Ocean控制台地址
      */
     private String buleOceanConsoleUrl;
+
+    private boolean useBuleOceanConsole = false;
     
 
     /**
@@ -93,6 +95,7 @@ public class BuildBeginInfo {
             blueOceanUrlBuilder.append("pipeline/");
         }
         this.consoleUrl = urlBuilder.toString();
+        this.useBuleOceanConsole = config.useBuleOceanConsole;
         this.buleOceanConsoleUrl = blueOceanUrlBuilder.toString();
         //工程名称
         this.projectName = projectName;
@@ -142,8 +145,11 @@ public class BuildBeginInfo {
             content.append("\n"+moreInfo+"\n\n");
         }
         if(StringUtils.isNotEmpty(this.consoleUrl)){
-            content.append("[查看控制台]:\n " + this.consoleUrl + "\n");
-            content.append("[查看BlueOcean控制台]:\n" + this.buleOceanConsoleUrl + "\n");
+            if (this.useBuleOceanConsole) {
+                content.append("[查看BlueOcean控制台]:\n" + this.buleOceanConsoleUrl + "\n");
+            } else {
+                content.append("[查看控制台]:\n " + this.consoleUrl + "\n");
+            }
         }
 
         result.put("content", content.toString());

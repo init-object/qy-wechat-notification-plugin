@@ -73,6 +73,14 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
         config.useProxy = useProxy;
     }
 
+    public boolean isUseBuleOceanConsole() {
+        return config.useBuleOceanConsole;
+    }
+
+    public void setUseBuleOceanConsole(boolean useBuleOceanConsole) {
+        config.useBuleOceanConsole = useBuleOceanConsole;
+    }
+
     public boolean isFailNotify() {
         return config.failNotify;
     }
@@ -130,6 +138,7 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
         unsaveConfig.topicName = config.topicName;
 
         unsaveConfig.useProxy = config.useProxy;
+        unsaveConfig.useBuleOceanConsole = config.useBuleOceanConsole;
         unsaveConfig.proxyHost = config.proxyHost;
         unsaveConfig.proxyPort = config.proxyPort;
         unsaveConfig.proxyUsername = config.proxyUsername;
@@ -182,6 +191,7 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
         config.mentionedId = json.getString("mentionedId");
         config.mentionedMobile = json.getString("mentionedMobile");
         config.useProxy = json.get("useProxy")!=null;
+        config.useBuleOceanConsole = json.getBoolean("useBuleOceanConsole");
         if(config.useProxy && json.get("useProxy") instanceof JSONObject){
             JSONObject jsonObject = json.getJSONObject("useProxy");
             config.proxyHost = jsonObject.getString("proxyHost");

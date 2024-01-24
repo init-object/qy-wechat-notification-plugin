@@ -29,5 +29,8 @@
         </f:entry>
         <f:validateButton method="testProxy" title="测试连接" with="proxyHost,proxyPort,proxyUsername,proxyPassword" />
     </f:optionalBlock>
+    <f:entry title="使用BuleOcean控制台" field="useBuleOceanConsole" checked="${descriptor.getUseBuleOceanConsole()}">
+        <f:checkbox />
+    </f:entry>
   </f:section>
 </j:jelly>

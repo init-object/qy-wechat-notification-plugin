@@ -31,6 +31,8 @@ public class BuildOverInfo {
      */
     private String buleOceanConsoleUrl;
 
+    private boolean useBuleOceanConsole = false;
+
     /**
      * 工程名称
      */
@@ -78,6 +80,7 @@ public class BuildOverInfo {
             blueOceanUrlBuilder.append("pipeline/");
         }
         this.consoleUrl = urlBuilder.toString();
+        this.useBuleOceanConsole = config.useBuleOceanConsole;
         this.buleOceanConsoleUrl = blueOceanUrlBuilder.toString();
         
         //工程名称
@@ -110,8 +113,11 @@ public class BuildOverInfo {
         }
 
          if(StringUtils.isNotEmpty(this.consoleUrl)){
-             content.append("[查看控制台]:\n" + this.consoleUrl + "\n");
-             content.append("[查看BlueOcean控制台]:\n" + this.buleOceanConsoleUrl + "\n");
+            if (this.useBuleOceanConsole) {
+                content.append("[查看BlueOcean控制台]:\n" + this.buleOceanConsoleUrl + "\n");
+            } else {
+                content.append("[查看控制台]:\n " + this.consoleUrl + "\n");
+            }
          }
  
          result.put("content", content.toString());
